@@ -10,6 +10,18 @@ from pathlib import Path
 from dotenv import load_dotenv
 load_dotenv(dotenv_path=Path(__file__).parent / ".env", override=True)
 
+# On Streamlit Cloud, secrets live in st.secrets — push them into os.environ
+# so that pydantic-settings (which reads os.environ) picks them up.
+import os
+try:
+    import streamlit as _st
+    for _key in ("IBM_CLOUD_API_KEY", "WATSONX_PROJECT_ID",
+                 "LANGUAGE_TRANSLATOR_APIKEY", "LANGUAGE_TRANSLATOR_URL"):
+        if _key in _st.secrets and not os.environ.get(_key):
+            os.environ[_key] = _st.secrets[_key]
+except Exception:
+    pass
+
 # Clear any stale cached settings from previous runs
 try:
     from core.config import get_settings
