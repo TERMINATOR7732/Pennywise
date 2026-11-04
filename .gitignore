@@ -1,0 +1,39 @@
+# Environment variables — never commit secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Pytest / test cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDEs
+.vscode/
+.idea/
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# FAISS / vector store artefacts (regenerated at runtime)
+*.faiss
+*.index
+
+# OS
+.DS_Store
+Thumbs.db
